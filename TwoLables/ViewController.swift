@@ -39,17 +39,24 @@ class ViewController: UIViewController {
         let style = NSMutableParagraphStyle()
         style.alignment = NSTextAlignment.right
         
+        let shadow = NSShadow()
+        shadow.shadowColor = UIColor.black
+        shadow.shadowBlurRadius = 5
+        
+        
         let attributes1: [NSAttributedString.Key : Any] = [
             .strokeColor : UIColor.red,
             .strokeWidth : 5.0,
             .font: UIFont(name: "Chalkduster", size: 18.0),
-            .paragraphStyle: style
+            .paragraphStyle: style,
+            .shadow: shadow
             ]
         let attributes2: [NSAttributedString.Key : Any] = [
             .strokeColor : UIColor.blue,
             .strokeWidth : 5.0,
             .font: UIFont(name: "HelveticaNeue-CondensedBold", size: 21.0),
-            .paragraphStyle: style
+            .paragraphStyle: style,
+            .shadow: shadow
             ]
         
         let attributetext1 = NSAttributedString(string: "Hello ", attributes: attributes1)
@@ -63,7 +70,7 @@ class ViewController: UIViewController {
         link = (str as NSString).range(of: "link")
         
         let style = NSMutableParagraphStyle()
-        style.alignment = NSTextAlignment.right
+        style.alignment = NSTextAlignment.center
         
         let attribute: [NSAttributedString.Key: Any] = [
             .font: UIFont.preferredFont(forTextStyle: .body).withSize(20),
@@ -75,8 +82,7 @@ class ViewController: UIViewController {
           attributetext.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: link)
         
           SecondLabel.attributedText = attributetext
-          SecondLabel.backgroundColor = UIColor.yellow
-        
+     
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tapLabel(gesture:)))
         SecondLabel.addGestureRecognizer(gesture)
     }
@@ -84,10 +90,10 @@ class ViewController: UIViewController {
     
     @IBAction func tapLabel(gesture: UITapGestureRecognizer) {
         if gesture.didTapAttributedTextInLabel(label: SecondLabel, inRange: link) {
-            if SecondLabel.backgroundColor == UIColor.yellow {
-                SecondLabel.backgroundColor = UIColor.green
+            if FirstLabel.backgroundColor == UIColor.yellow {
+                FirstLabel.backgroundColor = UIColor.green
             } else {
-                SecondLabel.backgroundColor = UIColor.yellow
+                FirstLabel.backgroundColor = UIColor.yellow
             }
         }
     }
